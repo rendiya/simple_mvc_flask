@@ -3,13 +3,15 @@ from flask import Flask
 from flask import g
 from flask import Response
 from flask import request
-from ayoklinik.controller.view import view
-from ayoklinik.cache import cache
+from app.controller.view import view
+
 
 app = Flask(__name__)
 
-app.config['CACHE_TYPE'] = 'simple'
-cache.init_app(app)
 app.config.from_pyfile('config.py')
 app.register_blueprint(view, url_prefix='/')
 
+from app.controller.home import home #add
+app.register_blueprint(home, url_prefix='/home') #add
+from app.controller.rendi import rendi
+app.register_blueprint(rendi, url_prefix='/rendi')
